@@ -26,12 +26,12 @@
 }
 html{scroll-behavior:smooth;}
 body{font-family:'Jost',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;}
-
+ 
 /* ── SCROLLBAR ── */
 ::-webkit-scrollbar{width:4px;}
 ::-webkit-scrollbar-track{background:var(--bg);}
 ::-webkit-scrollbar-thumb{background:var(--purple-mid);border-radius:99px;}
-
+ 
 /* ── NAV ── */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 5%;background:rgba(250,248,255,.92);backdrop-filter:blur(20px);border-bottom:0.5px solid var(--border);display:flex;align-items:center;justify-content:space-between;height:60px;}
 .nav-logo{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:var(--purple);font-style:italic;letter-spacing:.04em;cursor:pointer;}
@@ -44,15 +44,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 5%;background:rgba
 .mobile-menu{display:none;position:fixed;top:60px;left:0;right:0;background:var(--card);border-bottom:0.5px solid var(--border);padding:16px 5%;flex-direction:column;gap:14px;z-index:99;}
 .mobile-menu.open{display:flex;}
 .mobile-link{font-size:24px;color:var(--sub);cursor:pointer;background:none;border:none;font-family:'Jost',sans-serif;text-align:left;padding:4px 0;}
-
+ 
 /* ── PAGES ── */
 .pg{display:none;padding-top:60px;}
 .pg.on{display:block;}
-
+ 
 /* ══════════════════════════════════════
    HOME PAGE
 ══════════════════════════════════════ */
-
+ 
 /* HERO */
 .hero{min-height:100vh;background:var(--dark);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:80px 5% 60px;}
 .hero-grain{position:absolute;inset:0;opacity:.04;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px;}
@@ -75,14 +75,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 5%;background:rgba
 .hero-stat{}
 .hero-stat-val{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:500;color:#EDE8FF;font-style:italic;}
 .hero-stat-lbl{font-size:19px;color:rgba(255,255,255,.35);margin-top:2px;letter-spacing:.05em;}
-
+ 
 /* MARQUEE */
 .marquee-wrap{background:var(--purple);padding:13px 0;overflow:hidden;}
 .marquee-track{display:flex;gap:0;animation:marquee 20s linear infinite;white-space:nowrap;}
 .marquee-item{font-size:24px;color:rgba(255,255,255,.7);letter-spacing:.1em;padding:0 32px;font-weight:400;}
 .marquee-dot{color:rgba(255,255,255,.4);}
 @keyframes marquee{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
-
+ 
 /* SECTION COMMON */
 section{padding:90px 5%;}
 .section-tag{display:inline-block;font-size:24px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--purple);background:var(--purple-light);padding:4px 12px;border-radius:99px;margin-bottom:16px;}
@@ -91,7 +91,7 @@ section{padding:90px 5%;}
 .section-sub{font-size:19px;color:var(--sub);font-weight:300;line-height:1.7;max-width:520px;}
 .section-center{text-align:center;}
 .section-center .section-sub{margin:0 auto;}
-
+ 
 /* FOR WHO — HOME */
 .for-who{background:var(--dark);padding:90px 5%;}
 .for-who-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;max-width:900px;margin:50px auto 0;}
@@ -107,7 +107,7 @@ section{padding:90px 5%;}
 .fw-item.hi .fw-dot{background:#C9749B;}
 .fw-item.hi{color:rgba(255,255,255,.85);}
 .fw-cta{display:inline-flex;align-items:center;gap:6px;margin-top:24px;font-size:24px;font-weight:500;color:#EDE8FF;background:none;border:0.5px solid rgba(255,255,255,.2);padding:8px 16px;border-radius:99px;cursor:pointer;font-family:'Jost',sans-serif;}
-
+ 
 /* FEATURES GRID */
 .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:50px;}
 .feat-card{background:var(--card);border:0.5px solid var(--border);border-radius:18px;padding:28px;transition:border-color .2s,box-shadow .2s;}
@@ -115,7 +115,7 @@ section{padding:90px 5%;}
 .feat-icon{width:44px;height:44px;border-radius:12px;background:var(--purple-light);display:flex;align-items:center;justify-content:center;font-size:24px;color:var(--purple);margin-bottom:16px;}
 .feat-h{font-size:24px;font-weight:500;color:var(--text);margin-bottom:8px;}
 .feat-p{font-size:19px;color:var(--sub);line-height:1.65;font-weight:300;}
-
+ 
 /* HOW IT WORKS */
 .hiw{background:linear-gradient(160deg,#0D0820 0%,#1A0F3C 100%);padding:90px 5%;}
 .hiw-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:56px;position:relative;}
@@ -123,7 +123,7 @@ section{padding:90px 5%;}
 .hiw-num{font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:300;color:rgba(91,79,207,.3);font-style:italic;line-height:1;margin-bottom:14px;}
 .hiw-h{font-size:24px;font-weight:500;color:#EDE8FF;margin-bottom:10px;}
 .hiw-p{font-size:19px;color:rgba(255,255,255,.4);line-height:1.65;font-weight:300;}
-
+ 
 /* TESTIMONIALS */
 .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:50px;}
 .testi-card{background:var(--card);border:0.5px solid var(--border);border-radius:18px;padding:26px;}
@@ -136,13 +136,13 @@ section{padding:90px 5%;}
 .tav3{background:linear-gradient(135deg,#CF8B4F,#CFB84F);}
 .tname{font-size:19px;font-weight:500;color:var(--text);}
 .trole{font-size:19px;color:var(--sub);}
-
+ 
 /* CTA BAND */
 .cta-band{background:var(--purple);padding:80px 5%;text-align:center;}
 .cta-band-h{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,5vw,56px);font-weight:300;color:#fff;font-style:italic;margin-bottom:12px;}
 .cta-band-sub{font-size:19px;color:rgba(255,255,255,.6);margin-bottom:32px;font-weight:300;}
 .btn-white{padding:13px 32px;border-radius:99px;background:#fff;color:var(--purple);font-size:19px;font-weight:500;border:none;cursor:pointer;font-family:'Jost',sans-serif;}
-
+ 
 /* ══════════════════════════════════════
    FEATURES PAGE
 ══════════════════════════════════════ */
@@ -155,7 +155,7 @@ section{padding:90px 5%;}
 .feat-full-list{margin-top:12px;display:flex;flex-direction:column;gap:6px;}
 .feat-full-item{font-size:24px;color:var(--sub);display:flex;align-items:center;gap:6px;}
 .feat-full-item i{color:var(--green);font-size:19px;}
-
+ 
 /* ══════════════════════════════════════
    PRICING PAGE
 ══════════════════════════════════════ */
@@ -186,7 +186,7 @@ section{padding:90px 5%;}
 .price-btn{width:100%;padding:12px;border-radius:99px;font-size:19px;font-weight:500;cursor:pointer;font-family:'Jost',sans-serif;border:0.5px solid var(--border);background:transparent;color:var(--purple);transition:all .15s;}
 .price-btn:hover{background:var(--purple-light);}
 .price-card.featured .price-btn{background:#fff;color:var(--purple);border-color:#fff;}
-
+ 
 /* ══════════════════════════════════════
    ABOUT PAGE
 ══════════════════════════════════════ */
@@ -212,7 +212,7 @@ section{padding:90px 5%;}
 .team-role{font-size:24px;color:var(--purple);margin-bottom:6px;}
 .team-bio{font-size:24px;color:var(--sub);line-height:1.55;font-weight:300;}
 .team-card.open{border:0.5px dashed var(--border);background:var(--bg);}
-
+ 
 /* ══════════════════════════════════════
    CONTACT PAGE
 ══════════════════════════════════════ */
@@ -239,7 +239,7 @@ section{padding:90px 5%;}
 .form-submit{width:100%;padding:13px;border-radius:99px;background:var(--purple);color:#fff;font-size:19px;font-weight:500;border:none;cursor:pointer;font-family:'Jost',sans-serif;margin-top:4px;transition:background .15s;}
 .form-submit:hover{background:var(--purple-dark);}
 .form-note{font-size:19px;color:var(--sub);text-align:center;margin-top:10px;}
-
+ 
 /* FOOTER */
 footer{background:var(--dark);padding:60px 5% 30px;}
 .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px;}
@@ -251,11 +251,11 @@ footer{background:var(--dark);padding:60px 5% 30px;}
 .footer-bottom{border-top:0.5px solid rgba(255,255,255,.07);padding-top:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:gap;}
 .footer-copy{font-size:24px;color:rgba(255,255,255,.2);}
 .footer-note-text{font-size:19px;color:rgba(255,255,255,.15);font-style:italic;max-width:400px;text-align:right;}
-
+ 
 /* SUCCESS TOAST */
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--green);color:#fff;padding:12px 24px;border-radius:99px;font-size:19px;font-weight:500;z-index:999;transition:transform .3s;pointer-events:none;}
 .toast.show{transform:translateX(-50%) translateY(0);}
-
+ 
 /* RESPONSIVE */
 @media(max-width:768px){
   .nav-links{display:none;}
@@ -278,7 +278,7 @@ footer{background:var(--dark);padding:60px 5% 30px;}
 </style>
 </head>
 <body>
-
+ 
 <!-- NAV -->
 <nav>
   <span class="nav-logo" onclick="showPage('home')">rebelion</span>
@@ -299,7 +299,7 @@ footer{background:var(--dark);padding:60px 5% 30px;}
   <button class="mobile-link" onclick="showPage('about');toggleMenu()">About</button>
   <button class="mobile-link" onclick="showPage('contact');toggleMenu()">Contact</button>
 </div>
-
+ 
 <!-- ══════════ HOME ══════════ -->
 <div class="pg on" id="pg-home">
   <!-- HERO -->
@@ -310,7 +310,7 @@ footer{background:var(--dark);padding:60px 5% 30px;}
     <div class="hero-orb3"></div>
     <div class="hero-inner">
       <div class="hero-tag"><span class="hero-tag-dot"></span>Now in early access</div>
-      <h1 class="hero-h1">The <em>creator's</em><br><strong>command center.</strong></h1>
+      <h1 class="hero-h1">The <em>Creator</em><br><strong>Economy Center.</strong></h1>
       <p class="hero-sub">One platform to manage brand campaigns, track PR, collect payments, and grow.</p>
       <div class="hero-btns">
         <button class="btn-primary" onclick="showPage('contact')">Join as a creator — it's free</button>
@@ -323,7 +323,7 @@ footer{background:var(--dark);padding:60px 5% 30px;}
       </div>
     </div>
   </div>
-
+ 
   <!-- MARQUEE -->
   <div class="marquee-wrap">
     <div class="marquee-track">
@@ -341,7 +341,7 @@ footer{background:var(--dark);padding:60px 5% 30px;}
       <span class="marquee-item">Brand Discovery <span class="marquee-dot">✦</span></span>
     </div>
   </div>
-
+ 
   <!-- FOR WHO -->
   <div class="for-who">
     <div style="text-align:center;margin-bottom:10px;">
@@ -375,7 +375,7 @@ footer{background:var(--dark);padding:60px 5% 30px;}
       </div>
     </div>
   </div>
-
+ 
   <!-- FEATURES PREVIEW -->
   <section>
       <div class="section-center">
@@ -394,7 +394,7 @@ footer{background:var(--dark);padding:60px 5% 30px;}
       <button class="btn-primary" onclick="showPage('features')">See all features →</button>
     </div>
   </section>
-
+ 
   <!-- HOW IT WORKS -->
   <div class="hiw">
     <div style="text-align:center;">
@@ -407,7 +407,7 @@ footer{background:var(--dark);padding:60px 5% 30px;}
       <div class="hiw-step"><div class="hiw-num">03</div><div class="hiw-h">Get paid & grow</div><div class="hiw-p">Deliver content, get paid automatically, and use your analytics to win bigger deals next time.</div></div>
     </div>
   </div>
-
+ 
   <!-- CTA BAND -->
   <div class="cta-band">
     <h2 class="cta-band-h">Ready to rebel?</h2>
@@ -415,7 +415,7 @@ footer{background:var(--dark);padding:60px 5% 30px;}
     <button class="btn-white" onclick="showPage('contact')">Get early access — it's free</button>
   </div>
 </div>
-
+ 
 <!-- ══════════ FEATURES ══════════ -->
 <div class="pg" id="pg-features">
   <div class="feat-hero">
@@ -439,7 +439,7 @@ footer{background:var(--dark);padding:60px 5% 30px;}
     <button class="btn-white" onclick="showPage('contact')">Get early access</button>
   </div>
 </div>
-
+ 
 <!-- ══════════ PRICING ══════════ -->
 <div class="pg" id="pg-pricing">
   <div class="pricing-hero">
@@ -507,7 +507,7 @@ footer{background:var(--dark);padding:60px 5% 30px;}
     <button class="btn-white" onclick="showPage('contact')">Get early access</button>
   </div>
 </div>
-
+ 
 <!-- ══════════ ABOUT ══════════ -->
 <div class="pg" id="pg-about">
   <div class="about-hero">
@@ -591,7 +591,7 @@ footer{background:var(--dark);padding:60px 5% 30px;}
     <button class="btn-white" onclick="showPage('contact')">Get in touch</button>
   </div>
 </div>
-
+ 
 <!-- ══════════ CONTACT ══════════ -->
 <div class="pg" id="pg-contact">
   <div class="contact-hero">
@@ -631,13 +631,13 @@ footer{background:var(--dark);padding:60px 5% 30px;}
     </div>
   </div>
 </div>
-
+ 
 <!-- FOOTER -->
 <footer>
   <div class="footer-grid">
     <div>
       <div class="footer-brand">rebelion</div>
-      <div class="footer-desc">The creator's command center. One platform for campaigns, PR, payments, and growth.</div>
+      <div class="footer-desc">The Creator Economy Center. One platform for campaigns, PR, payments, and growth.</div>
     </div>
     <div>
       <div class="footer-col-h">Product</div>
@@ -663,12 +663,12 @@ footer{background:var(--dark);padding:60px 5% 30px;}
     <div class="footer-note-text">Brand names shown are illustrative examples only and do not represent actual partnerships.</div>
   </div>
 </footer>
-
+ 
 <div class="toast" id="toast">🎉 You're on the list! We'll be in touch soon.</div>
-
+ 
 <script>
 const pages = ['home','features','pricing','about','contact'];
-
+ 
 function showPage(name) {
   pages.forEach(function(p) {
     document.getElementById('pg-' + p).classList.remove('on');
@@ -682,17 +682,17 @@ function showPage(name) {
   // close mobile menu
   document.getElementById('mobile-menu').classList.remove('open');
 }
-
+ 
 function toggleMenu() {
   document.getElementById('mobile-menu').classList.toggle('open');
 }
-
+ 
 function submitForm() {
   var toast = document.getElementById('toast');
   toast.classList.add('show');
   setTimeout(function() { toast.classList.remove('show'); }, 3500);
 }
-
+ 
 // Close mobile menu on outside click
 document.addEventListener('click', function(e) {
   var menu = document.getElementById('mobile-menu');
