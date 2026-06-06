@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Rebelion.io — The Creator's Command Center</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+:root{
+  --bg:#FAF8FF;
+  --card:#fff;
+  --border:#EAE4FF;
+  --purple:#5B4FCF;
+  --purple-dark:#3D2FA0;
+  --purple-light:#F0EDFF;
+  --purple-mid:#A898E0;
+  --text:#2A1F6E;
+  --sub:#8B82B8;
+  --green:#1A7A5A;
+  --amber:#B5720A;
+  --dark:#0D0820;
+  --dark2:#160E30;
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Jost',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--purple-mid);border-radius:99px;}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 5%;background:rgba(250,248,255,.92);backdrop-filter:blur(20px);border-bottom:0.5px solid var(--border);display:flex;align-items:center;justify-content:space-between;height:60px;}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:var(--purple);font-style:italic;letter-spacing:.04em;cursor:pointer;}
+.nav-links{display:flex;align-items:center;gap:28px;}
+.nav-link{font-size:19px;font-weight:400;color:var(--sub);cursor:pointer;transition:color .15s;background:none;border:none;font-family:'Jost',sans-serif;}
+.nav-link:hover,.nav-link.on{color:var(--purple);}
+.nav-cta{padding:8px 20px;border-radius:99px;background:var(--purple);color:#fff;font-size:24px;font-weight:500;border:none;cursor:pointer;font-family:'Jost',sans-serif;transition:background .15s;}
+.nav-cta:hover{background:var(--purple-dark);}
+.nav-mobile-btn{display:none;background:none;border:none;font-size:24px;color:var(--purple);cursor:pointer;}
+.mobile-menu{display:none;position:fixed;top:60px;left:0;right:0;background:var(--card);border-bottom:0.5px solid var(--border);padding:16px 5%;flex-direction:column;gap:14px;z-index:99;}
+.mobile-menu.open{display:flex;}
+.mobile-link{font-size:24px;color:var(--sub);cursor:pointer;background:none;border:none;font-family:'Jost',sans-serif;text-align:left;padding:4px 0;}
+
+/* ── PAGES ── */
+.pg{display:none;padding-top:60px;}
+.pg.on{display:block;}
+
+/* ══════════════════════════════════════
+   HOME PAGE
+══════════════════════════════════════ */
+
+/* HERO */
+.hero{min-height:100vh;background:var(--dark);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:80px 5% 60px;}
+.hero-grain{position:absolute;inset:0;opacity:.04;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px;}
+.hero-orb1{position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(91,79,207,.35) 0%,transparent 70%);top:-100px;right:-100px;pointer-events:none;}
+.hero-orb2{position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(201,116,155,.2) 0%,transparent 70%);bottom:-80px;left:-80px;pointer-events:none;}
+.hero-orb3{position:absolute;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(168,152,224,.15) 0%,transparent 70%);top:40%;left:30%;pointer-events:none;}
+.hero-inner{position:relative;z-index:2;text-align:center;max-width:800px;}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:99px;border:0.5px solid rgba(212,197,249,.3);background:rgba(91,79,207,.15);color:#C5BCE8;font-size:19px;font-weight:500;letter-spacing:.08em;margin-bottom:28px;}
+.hero-tag-dot{width:5px;height:5px;border-radius:50%;background:#C5BCE8;}
+.hero-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(48px,8vw,88px);font-weight:300;color:#EDE8FF;line-height:1.05;letter-spacing:-.01em;margin-bottom:10px;}
+.hero-h1 em{font-style:italic;color:#C9749B;}
+.hero-h1 strong{font-weight:600;}
+.hero-sub{font-size:clamp(14px,2vw,17px);color:rgba(255,255,255,.45);font-weight:300;line-height:1.7;max-width:520px;margin:0 auto 36px;}
+.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:56px;}
+.btn-primary{padding:13px 28px;border-radius:99px;background:var(--purple);color:#fff;font-size:19px;font-weight:500;border:none;cursor:pointer;font-family:'Jost',sans-serif;transition:all .15s;}
+.btn-primary:hover{background:var(--purple-dark);transform:translateY(-1px);}
+.btn-outline{padding:13px 28px;border-radius:99px;background:transparent;color:#C5BCE8;font-size:19px;font-weight:400;border:0.5px solid rgba(197,188,232,.3);cursor:pointer;font-family:'Jost',sans-serif;transition:all .15s;}
+.btn-outline:hover{border-color:rgba(197,188,232,.6);color:#EDE8FF;}
+.hero-stats{display:flex;gap:40px;justify-content:center;flex-wrap:wrap;}
+.hero-stat{}
+.hero-stat-val{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:500;color:#EDE8FF;font-style:italic;}
+.hero-stat-lbl{font-size:19px;color:rgba(255,255,255,.35);margin-top:2px;letter-spacing:.05em;}
+
+/* MARQUEE */
+.marquee-wrap{background:var(--purple);padding:13px 0;overflow:hidden;}
+.marquee-track{display:flex;gap:0;animation:marquee 20s linear infinite;white-space:nowrap;}
+.marquee-item{font-size:24px;color:rgba(255,255,255,.7);letter-spacing:.1em;padding:0 32px;font-weight:400;}
+.marquee-dot{color:rgba(255,255,255,.4);}
+@keyframes marquee{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+/* SECTION COMMON */
+section{padding:90px 5%;}
+.section-tag{display:inline-block;font-size:24px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--purple);background:var(--purple-light);padding:4px 12px;border-radius:99px;margin-bottom:16px;}
+.section-h{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,5vw,52px);font-weight:400;color:var(--text);line-height:1.15;margin-bottom:16px;}
+.section-h em{font-style:italic;color:var(--purple);}
+.section-sub{font-size:19px;color:var(--sub);font-weight:300;line-height:1.7;max-width:520px;}
+.section-center{text-align:center;}
+.section-center .section-sub{margin:0 auto;}
+
+/* FOR WHO — HOME */
+.for-who{background:var(--dark);padding:90px 5%;}
+.for-who-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;max-width:900px;margin:50px auto 0;}
+.fw-card{padding:40px;position:relative;overflow:hidden;}
+.fw-card:first-child{background:var(--purple);border-radius:20px 0 0 20px;}
+.fw-card:last-child{background:rgba(255,255,255,.04);border:0.5px solid rgba(255,255,255,.08);border-radius:0 20px 20px 0;}
+.fw-tag{font-size:24px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px;color:rgba(255,255,255,.5);}
+.fw-h{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:500;color:#EDE8FF;font-style:italic;margin-bottom:14px;}
+.fw-p{font-size:19px;color:rgba(255,255,255,.5);line-height:1.7;font-weight:300;margin-bottom:20px;}
+.fw-list{display:flex;flex-direction:column;gap:8px;}
+.fw-item{display:flex;align-items:center;gap:8px;font-size:24px;color:rgba(255,255,255,.6);}
+.fw-dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.4);flex-shrink:0;}
+.fw-item.hi .fw-dot{background:#C9749B;}
+.fw-item.hi{color:rgba(255,255,255,.85);}
+.fw-cta{display:inline-flex;align-items:center;gap:6px;margin-top:24px;font-size:24px;font-weight:500;color:#EDE8FF;background:none;border:0.5px solid rgba(255,255,255,.2);padding:8px 16px;border-radius:99px;cursor:pointer;font-family:'Jost',sans-serif;}
+
+/* FEATURES GRID */
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:50px;}
+.feat-card{background:var(--card);border:0.5px solid var(--border);border-radius:18px;padding:28px;transition:border-color .2s,box-shadow .2s;}
+.feat-card:hover{border-color:var(--purple-mid);box-shadow:0 4px 24px rgba(91,79,207,.08);}
+.feat-icon{width:44px;height:44px;border-radius:12px;background:var(--purple-light);display:flex;align-items:center;justify-content:center;font-size:24px;color:var(--purple);margin-bottom:16px;}
+.feat-h{font-size:24px;font-weight:500;color:var(--text);margin-bottom:8px;}
+.feat-p{font-size:19px;color:var(--sub);line-height:1.65;font-weight:300;}
+
+/* HOW IT WORKS */
+.hiw{background:linear-gradient(160deg,#0D0820 0%,#1A0F3C 100%);padding:90px 5%;}
+.hiw-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:56px;position:relative;}
+.hiw-step{padding:36px 28px;text-align:center;}
+.hiw-num{font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:300;color:rgba(91,79,207,.3);font-style:italic;line-height:1;margin-bottom:14px;}
+.hiw-h{font-size:24px;font-weight:500;color:#EDE8FF;margin-bottom:10px;}
+.hiw-p{font-size:19px;color:rgba(255,255,255,.4);line-height:1.65;font-weight:300;}
+
+/* TESTIMONIALS */
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:50px;}
+.testi-card{background:var(--card);border:0.5px solid var(--border);border-radius:18px;padding:26px;}
+.testi-stars{color:#F0B429;font-size:19px;margin-bottom:12px;letter-spacing:2px;}
+.testi-q{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:400;color:var(--text);line-height:1.55;margin-bottom:16px;font-style:italic;}
+.testi-av{display:flex;align-items:center;gap:10px;}
+.tav{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:#fff;font-style:italic;}
+.tav1{background:linear-gradient(135deg,#C9749B,#8B4FCF);}
+.tav2{background:linear-gradient(135deg,#4FA8CF,#4FCF8B);}
+.tav3{background:linear-gradient(135deg,#CF8B4F,#CFB84F);}
+.tname{font-size:19px;font-weight:500;color:var(--text);}
+.trole{font-size:19px;color:var(--sub);}
+
+/* CTA BAND */
+.cta-band{background:var(--purple);padding:80px 5%;text-align:center;}
+.cta-band-h{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,5vw,56px);font-weight:300;color:#fff;font-style:italic;margin-bottom:12px;}
+.cta-band-sub{font-size:19px;color:rgba(255,255,255,.6);margin-bottom:32px;font-weight:300;}
+.btn-white{padding:13px 32px;border-radius:99px;background:#fff;color:var(--purple);font-size:19px;font-weight:500;border:none;cursor:pointer;font-family:'Jost',sans-serif;}
+
+/* ══════════════════════════════════════
+   FEATURES PAGE
+══════════════════════════════════════ */
+.feat-hero{background:linear-gradient(160deg,var(--dark) 0%,var(--dark2) 100%);padding:100px 5% 80px;text-align:center;}
+.feat-full-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:56px;}
+.feat-full-card{background:var(--card);border:0.5px solid var(--border);border-radius:20px;padding:36px;display:flex;gap:20px;align-items:flex-start;}
+.feat-full-icon{width:52px;height:52px;border-radius:14px;background:var(--purple-light);display:flex;align-items:center;justify-content:center;font-size:24px;color:var(--purple);flex-shrink:0;}
+.feat-full-h{font-size:24px;font-weight:500;color:var(--text);margin-bottom:8px;}
+.feat-full-p{font-size:19px;color:var(--sub);line-height:1.7;font-weight:300;}
+.feat-full-list{margin-top:12px;display:flex;flex-direction:column;gap:6px;}
+.feat-full-item{font-size:24px;color:var(--sub);display:flex;align-items:center;gap:6px;}
+.feat-full-item i{color:var(--green);font-size:19px;}
+
+/* ══════════════════════════════════════
+   PRICING PAGE
+══════════════════════════════════════ */
+.pricing-hero{background:linear-gradient(160deg,var(--dark),var(--dark2));padding:100px 5% 80px;text-align:center;}
+.pricing-toggle{display:flex;align-items:center;gap:12px;justify-content:center;margin:28px 0 50px;}
+.toggle-lbl{font-size:19px;color:rgba(255,255,255,.5);}
+.toggle-track{width:44px;height:24px;border-radius:99px;background:rgba(255,255,255,.1);cursor:pointer;position:relative;border:0.5px solid rgba(255,255,255,.15);}
+.toggle-thumb{width:18px;height:18px;border-radius:50%;background:#EDE8FF;position:absolute;top:2px;left:3px;transition:transform .2s;}
+.toggle-track.on .toggle-thumb{transform:translateX(20px);background:var(--purple);}
+.save-badge{font-size:24px;background:rgba(93,202,165,.15);color:#5DCAA5;padding:2px 8px;border-radius:99px;font-weight:500;}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:900px;margin:0 auto;}
+.price-card{border-radius:20px;padding:32px;background:var(--card);border:0.5px solid var(--border);}
+.price-card.featured{background:var(--purple);border-color:var(--purple);position:relative;}
+.price-card.featured::before{content:'Most Popular';position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:#C9749B;color:#fff;font-size:24px;font-weight:500;padding:3px 12px;border-radius:99px;white-space:nowrap;}
+.price-tier{font-size:19px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--sub);margin-bottom:16px;}
+.price-card.featured .price-tier{color:rgba(255,255,255,.6);}
+.price-val{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:500;color:var(--text);font-style:italic;line-height:1;}
+.price-card.featured .price-val{color:#fff;}
+.price-period{font-size:24px;color:var(--sub);margin-top:4px;margin-bottom:20px;}
+.price-card.featured .price-period{color:rgba(255,255,255,.5);}
+.price-divider{height:0.5px;background:var(--border);margin-bottom:20px;}
+.price-card.featured .price-divider{background:rgba(255,255,255,.15);}
+.price-list{display:flex;flex-direction:column;gap:10px;margin-bottom:28px;}
+.price-item{font-size:19px;color:var(--sub);display:flex;align-items:center;gap:8px;}
+.price-card.featured .price-item{color:rgba(255,255,255,.75);}
+.price-item i{color:var(--green);font-size:24px;}
+.price-card.featured .price-item i{color:#B8F0DA;}
+.price-btn{width:100%;padding:12px;border-radius:99px;font-size:19px;font-weight:500;cursor:pointer;font-family:'Jost',sans-serif;border:0.5px solid var(--border);background:transparent;color:var(--purple);transition:all .15s;}
+.price-btn:hover{background:var(--purple-light);}
+.price-card.featured .price-btn{background:#fff;color:var(--purple);border-color:#fff;}
+
+/* ══════════════════════════════════════
+   ABOUT PAGE
+══════════════════════════════════════ */
+.about-hero{background:linear-gradient(160deg,var(--dark),var(--dark2));padding:100px 5% 80px;}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;max-width:960px;margin:0 auto;}
+.about-visual{border-radius:20px;overflow:hidden;background:linear-gradient(135deg,#2A1F6E,#5B4FCF,#C9749B);height:380px;display:flex;align-items:center;justify-content:center;position:relative;}
+.about-visual-text{font-family:'Cormorant Garamond',serif;font-size:80px;font-weight:300;color:rgba(255,255,255,.08);font-style:italic;letter-spacing:.05em;user-select:none;}
+.about-visual-tag{position:absolute;bottom:24px;left:24px;right:24px;background:rgba(0,0,0,.3);backdrop-filter:blur(12px);border-radius:12px;padding:14px 16px;border:0.5px solid rgba(255,255,255,.1);}
+.about-tag-h{font-size:19px;font-weight:500;color:#EDE8FF;margin-bottom:3px;}
+.about-tag-p{font-size:19px;color:rgba(255,255,255,.5);}
+.about-text-col{}
+.about-mission{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:400;color:var(--text);line-height:1.4;margin:16px 0 20px;font-style:italic;}
+.about-p{font-size:24px;color:var(--sub);line-height:1.75;font-weight:300;margin-bottom:16px;}
+.about-values{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:32px;}
+.av-card{background:var(--purple-light);border-radius:14px;padding:16px;}
+.av-card-h{font-size:19px;font-weight:500;color:var(--purple);margin-bottom:4px;}
+.av-card-p{font-size:19px;color:var(--sub);line-height:1.5;}
+.team-section{padding:80px 5%;background:var(--bg);}
+.team-grid{display:grid;grid-template-columns:1fr;gap:16px;max-width:600px;margin:40px auto 0;}
+.team-card{background:var(--card);border:0.5px solid var(--border);border-radius:18px;padding:28px;display:flex;gap:16px;}
+.team-av{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:#fff;font-style:italic;flex-shrink:0;}
+.team-name{font-size:19px;font-weight:500;color:var(--text);margin-bottom:3px;}
+.team-role{font-size:24px;color:var(--purple);margin-bottom:6px;}
+.team-bio{font-size:24px;color:var(--sub);line-height:1.55;font-weight:300;}
+.team-card.open{border:0.5px dashed var(--border);background:var(--bg);}
+
+/* ══════════════════════════════════════
+   CONTACT PAGE
+══════════════════════════════════════ */
+.contact-hero{background:linear-gradient(160deg,var(--dark),var(--dark2));padding:100px 5% 60px;text-align:center;}
+.contact-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:40px;max-width:900px;margin:60px auto 0;padding:0 5%;}
+.contact-info{}
+.contact-info-h{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:400;color:var(--text);font-style:italic;margin-bottom:12px;}
+.contact-info-p{font-size:24px;color:var(--sub);line-height:1.7;font-weight:300;margin-bottom:28px;}
+.contact-links{display:flex;flex-direction:column;gap:12px;}
+.contact-link-item{display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:12px;background:var(--card);border:0.5px solid var(--border);}
+.cli-icon{width:36px;height:36px;border-radius:10px;background:var(--purple-light);display:flex;align-items:center;justify-content:center;font-size:19px;color:var(--purple);flex-shrink:0;}
+.cli-label{font-size:24px;color:var(--sub);}
+.cli-val{font-size:19px;font-weight:500;color:var(--text);}
+.contact-form{background:var(--card);border:0.5px solid var(--border);border-radius:20px;padding:32px;}
+.form-h{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;color:var(--text);font-style:italic;margin-bottom:24px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+.form-group{display:flex;flex-direction:column;gap:6px;margin-bottom:12px;}
+.form-label{font-size:19px;font-weight:500;color:var(--sub);letter-spacing:.05em;text-transform:uppercase;}
+.form-input{padding:11px 14px;border-radius:10px;border:0.5px solid var(--border);background:var(--bg);font-size:19px;color:var(--text);font-family:'Jost',sans-serif;outline:none;transition:border-color .15s;}
+.form-input:focus{border-color:var(--purple-mid);}
+.form-select{padding:11px 14px;border-radius:10px;border:0.5px solid var(--border);background:var(--bg);font-size:19px;color:var(--text);font-family:'Jost',sans-serif;outline:none;cursor:pointer;}
+.form-textarea{padding:11px 14px;border-radius:10px;border:0.5px solid var(--border);background:var(--bg);font-size:19px;color:var(--text);font-family:'Jost',sans-serif;outline:none;resize:vertical;min-height:100px;transition:border-color .15s;}
+.form-textarea:focus{border-color:var(--purple-mid);}
+.form-submit{width:100%;padding:13px;border-radius:99px;background:var(--purple);color:#fff;font-size:19px;font-weight:500;border:none;cursor:pointer;font-family:'Jost',sans-serif;margin-top:4px;transition:background .15s;}
+.form-submit:hover{background:var(--purple-dark);}
+.form-note{font-size:19px;color:var(--sub);text-align:center;margin-top:10px;}
+
+/* FOOTER */
+footer{background:var(--dark);padding:60px 5% 30px;}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px;}
+.footer-brand{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:#EDE8FF;font-style:italic;letter-spacing:.04em;margin-bottom:12px;}
+.footer-desc{font-size:19px;color:rgba(255,255,255,.35);line-height:1.65;font-weight:300;}
+.footer-col-h{font-size:19px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:14px;}
+.footer-link{display:block;font-size:19px;color:rgba(255,255,255,.35);margin-bottom:8px;cursor:pointer;background:none;border:none;font-family:'Jost',sans-serif;text-align:left;transition:color .15s;}
+.footer-link:hover{color:rgba(255,255,255,.7);}
+.footer-bottom{border-top:0.5px solid rgba(255,255,255,.07);padding-top:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:gap;}
+.footer-copy{font-size:24px;color:rgba(255,255,255,.2);}
+.footer-note-text{font-size:19px;color:rgba(255,255,255,.15);font-style:italic;max-width:400px;text-align:right;}
+
+/* SUCCESS TOAST */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--green);color:#fff;padding:12px 24px;border-radius:99px;font-size:19px;font-weight:500;z-index:999;transition:transform .3s;pointer-events:none;}
+.toast.show{transform:translateX(-50%) translateY(0);}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .nav-links{display:none;}
+  .nav-mobile-btn{display:block;}
+  .hero-stats{gap:24px;}
+  .for-who-grid{grid-template-columns:1fr;}
+  .fw-card:first-child{border-radius:20px 20px 0 0;}
+  .fw-card:last-child{border-radius:0 0 20px 20px;}
+  .feat-grid{grid-template-columns:1fr;}
+  .hiw-steps{grid-template-columns:1fr;}
+  .testi-grid{grid-template-columns:1fr;}
+  .feat-full-grid{grid-template-columns:1fr;}
+  .pricing-grid{grid-template-columns:1fr;}
+  .about-grid{grid-template-columns:1fr;}
+  .about-visual{height:220px;}
+  .contact-grid{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr 1fr;}
+  .form-row{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo" onclick="showPage('home')">rebelion</span>
+  <div class="nav-links">
+    <button class="nav-link on" id="nl-home"     onclick="showPage('home')">Home</button>
+    <button class="nav-link"    id="nl-features" onclick="showPage('features')">Features</button>
+    <button class="nav-link"    id="nl-pricing"  onclick="showPage('pricing')">Pricing</button>
+    <button class="nav-link"    id="nl-about"    onclick="showPage('about')">About</button>
+    <button class="nav-link"    id="nl-contact"  onclick="showPage('contact')">Contact</button>
+    <button class="nav-cta"     onclick="showPage('contact')">Get early access</button>
+  </div>
+  <button class="nav-mobile-btn" onclick="toggleMenu()"><i class="ti ti-menu-2"></i></button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <button class="mobile-link" onclick="showPage('home');toggleMenu()">Home</button>
+  <button class="mobile-link" onclick="showPage('features');toggleMenu()">Features</button>
+  <button class="mobile-link" onclick="showPage('pricing');toggleMenu()">Pricing</button>
+  <button class="mobile-link" onclick="showPage('about');toggleMenu()">About</button>
+  <button class="mobile-link" onclick="showPage('contact');toggleMenu()">Contact</button>
+</div>
+
+<!-- ══════════ HOME ══════════ -->
+<div class="pg on" id="pg-home">
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-grain"></div>
+    <div class="hero-orb1"></div>
+    <div class="hero-orb2"></div>
+    <div class="hero-orb3"></div>
+    <div class="hero-inner">
+      <div class="hero-tag"><span class="hero-tag-dot"></span>Now in early access</div>
+      <h1 class="hero-h1">The <em>creator's</em><br><strong>command center.</strong></h1>
+      <p class="hero-sub">One platform to manage brand campaigns, track PR, collect payments, and grow.</p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="showPage('contact')">Join as a creator — it's free</button>
+        <button class="btn-outline" onclick="showPage('pricing')">Brand plans →</button>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="hero-stat-val">200M+</div><div class="hero-stat-lbl">CREATORS GLOBALLY</div></div>
+        <div class="hero-stat"><div class="hero-stat-val">$24B</div><div class="hero-stat-lbl">INFLUENCER MARKET</div></div>
+        <div class="hero-stat"><div class="hero-stat-val">$0</div><div class="hero-stat-lbl">FOR CREATORS</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MARQUEE -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <span class="marquee-item">Campaign Hub <span class="marquee-dot">✦</span></span>
+      <span class="marquee-item">PR Tracker <span class="marquee-dot">✦</span></span>
+      <span class="marquee-item">Payments & Invoicing <span class="marquee-dot">✦</span></span>
+      <span class="marquee-item">Creator Analytics <span class="marquee-dot">✦</span></span>
+      <span class="marquee-item">Media Kit Builder <span class="marquee-dot">✦</span></span>
+      <span class="marquee-item">Brand Discovery <span class="marquee-dot">✦</span></span>
+      <span class="marquee-item">Campaign Hub <span class="marquee-dot">✦</span></span>
+      <span class="marquee-item">PR Tracker <span class="marquee-dot">✦</span></span>
+      <span class="marquee-item">Payments & Invoicing <span class="marquee-dot">✦</span></span>
+      <span class="marquee-item">Creator Analytics <span class="marquee-dot">✦</span></span>
+      <span class="marquee-item">Media Kit Builder <span class="marquee-dot">✦</span></span>
+      <span class="marquee-item">Brand Discovery <span class="marquee-dot">✦</span></span>
+    </div>
+  </div>
+
+  <!-- FOR WHO -->
+  <div class="for-who">
+    <div style="text-align:center;margin-bottom:10px;">
+      <span class="section-tag" style="background:rgba(91,79,207,.2);color:#C5BCE8;">Built for both sides</span>
+    </div>
+    <h2 class="section-h" style="color:#EDE8FF;text-align:center;">One platform.<br><em>Two superpowers.</em></h2>
+    <div class="for-who-grid">
+      <div class="fw-card">
+        <div class="fw-tag">For Creators</div>
+        <div class="fw-h">Your business, beautifully organised.</div>
+        <div class="fw-p">Everything you need to manage your brand partnerships.</div>
+        <div class="fw-list">
+          <div class="fw-item hi"><div class="fw-dot"></div>Discover & apply to brand campaigns</div>
+          <div class="fw-item hi"><div class="fw-dot"></div>Track every PR shipment automatically</div>
+          <div class="fw-item hi"><div class="fw-dot"></div>Send invoices & get paid faster</div>
+          <div class="fw-item hi"><div class="fw-dot"></div>Share your portfolio with brands</div>
+        </div>
+        <button class="fw-cta" onclick="showPage('contact')">Join as creator →</button>
+      </div>
+      <div class="fw-card">
+        <div class="fw-tag">For Brands</div>
+        <div class="fw-h">Find the right creator. Every time.</div>
+        <div class="fw-p">Access a curated network of serious creators. Connect, collaborate, and grow together.</div>
+        <div class="fw-list">
+          <div class="fw-item hi"><div class="fw-dot"></div>Post campaigns to targeted creators</div>
+          <div class="fw-item hi"><div class="fw-dot"></div>Manage gifting & PR logistics</div>
+          <div class="fw-item hi"><div class="fw-dot"></div>Track deliverables in real time</div>
+          <div class="fw-item hi"><div class="fw-dot"></div>Measure ROI across partnerships</div>
+        </div>
+        <button class="fw-cta" onclick="showPage('pricing')">See brand plans →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURES PREVIEW -->
+  <section>
+      <div class="section-center">
+      <span class="section-tag">What's inside</span>
+      <h2 class="section-h">Everything you need.</h2>
+    </div>
+    <div class="feat-grid" style="grid-template-columns:repeat(2,1fr);">
+      <div class="feat-card" style="display:flex;gap:16px;align-items:flex-start;"><div class="feat-icon" style="flex-shrink:0;"><i class="ti ti-speakerphone"></i></div><div><div class="feat-h">Campaign Hub</div><div class="feat-p">Discover brand campaigns, apply in one tap, and manage all communication in-app.</div></div></div>
+      <div class="feat-card" style="display:flex;gap:16px;align-items:flex-start;"><div class="feat-icon" style="flex-shrink:0;"><i class="ti ti-package"></i></div><div><div class="feat-h">PR Tracker</div><div class="feat-p">Auto-track gifted products from shipment to delivery. Never miss a content deadline again.</div></div></div>
+      <div class="feat-card" style="display:flex;gap:16px;align-items:flex-start;"><div class="feat-icon" style="flex-shrink:0;"><i class="ti ti-currency-dollar"></i></div><div><div class="feat-h">Payments & Invoicing</div><div class="feat-p">Generate invoices, receive payments, and track all earnings — automated and transparent.</div></div></div>
+      <div class="feat-card" style="display:flex;gap:16px;align-items:flex-start;"><div class="feat-icon" style="flex-shrink:0;"><i class="ti ti-chart-bar"></i></div><div><div class="feat-h">Analytics</div><div class="feat-p">Share campaign performance reports directly with brands. Prove your ROI, win repeat deals.</div></div></div>
+      <div class="feat-card" style="display:flex;gap:16px;align-items:flex-start;"><div class="feat-icon" style="flex-shrink:0;"><i class="ti ti-layout-grid"></i></div><div><div class="feat-h">Creator Feed</div><div class="feat-p">A professional content network. Brands discover you, you get found by the right partners.</div></div></div>
+      <div class="feat-card" style="display:flex;gap:16px;align-items:flex-start;"><div class="feat-icon" style="flex-shrink:0;"><i class="ti ti-id-badge"></i></div><div><div class="feat-h">Media Kit Builder</div><div class="feat-p">Auto-generate a stunning media kit from your profile stats and past campaign performance.</div></div></div>
+    </div>
+    <div style="text-align:center;margin-top:32px;">
+      <button class="btn-primary" onclick="showPage('features')">See all features →</button>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <div class="hiw">
+    <div style="text-align:center;">
+      <span class="section-tag" style="background:rgba(91,79,207,.2);color:#C5BCE8;">How it works</span>
+      <h2 class="section-h" style="color:#EDE8FF;">Up and running<br><em>in three steps.</em></h2>
+    </div>
+    <div class="hiw-steps">
+      <div class="hiw-step"><div class="hiw-num">01</div><div class="hiw-h">Create your profile</div><div class="hiw-p">Set up your creator profile, upload your portfolio videos, and set your rates. Takes 5 minutes.</div></div>
+      <div class="hiw-step"><div class="hiw-num">02</div><div class="hiw-h">Discover campaigns</div><div class="hiw-p">Browse brand campaigns that match your niche. Apply with one tap. All communication stays in-app.</div></div>
+      <div class="hiw-step"><div class="hiw-num">03</div><div class="hiw-h">Get paid & grow</div><div class="hiw-p">Deliver content, get paid automatically, and use your analytics to win bigger deals next time.</div></div>
+    </div>
+  </div>
+
+  <!-- CTA BAND -->
+  <div class="cta-band">
+    <h2 class="cta-band-h">Ready to rebel?</h2>
+    <p class="cta-band-sub">Join thousands of creators and brands building better partnerships.</p>
+    <button class="btn-white" onclick="showPage('contact')">Get early access — it's free</button>
+  </div>
+</div>
+
+<!-- ══════════ FEATURES ══════════ -->
+<div class="pg" id="pg-features">
+  <div class="feat-hero">
+    <span class="section-tag" style="background:rgba(91,79,207,.2);color:#C5BCE8;">Features</span>
+    <h1 class="hero-h1" style="font-size:clamp(36px,6vw,64px);margin-top:12px;">Everything in<br><em>one place.</em></h1>
+    <p style="font-size:19px;color:rgba(255,255,255,.4);font-weight:300;max-width:480px;margin:14px auto 0;line-height:1.7;">Built for creators first. Powerful enough for brands. The tools that actually matter.</p>
+  </div>
+  <section>
+    <div class="feat-full-grid">
+      <div class="feat-full-card"><div class="feat-full-icon"><i class="ti ti-speakerphone"></i></div><div><div class="feat-full-h">Campaign Hub</div><div class="feat-full-p">Your central command for every brand deal. Browse, apply, negotiate, and deliver — all without leaving the app.</div><div class="feat-full-list"><div class="feat-full-item"><i class="ti ti-check"></i>Brand campaign discovery feed</div><div class="feat-full-item"><i class="ti ti-check"></i>One-tap application with your media kit</div><div class="feat-full-item"><i class="ti ti-check"></i>In-app messaging with brands</div><div class="feat-full-item"><i class="ti ti-check"></i>Contract & deliverable tracking</div></div></div></div>
+      <div class="feat-full-card"><div class="feat-full-icon"><i class="ti ti-package"></i></div><div><div class="feat-full-h">PR & Gifting Tracker</div><div class="feat-full-p">Never lose track of a gifted product again. From the moment a brand ships to the moment you post.</div><div class="feat-full-list"><div class="feat-full-item"><i class="ti ti-check"></i>Automatic shipment tracking</div><div class="feat-full-item"><i class="ti ti-check"></i>Content deadline reminders</div><div class="feat-full-item"><i class="ti ti-check"></i>Brand visibility on delivery status</div><div class="feat-full-item"><i class="ti ti-check"></i>Post submission confirmation</div></div></div></div>
+      <div class="feat-full-card"><div class="feat-full-icon"><i class="ti ti-currency-dollar"></i></div><div><div class="feat-full-h">Payments & Invoicing</div><div class="feat-full-p">Get paid faster. Automated invoicing, payment collection, and earnings tracking — all in one dashboard.</div><div class="feat-full-list"><div class="feat-full-item"><i class="ti ti-check"></i>Auto-generated invoices</div><div class="feat-full-item"><i class="ti ti-check"></i>Payment status tracking</div><div class="feat-full-item"><i class="ti ti-check"></i>Earnings history & CSV export</div><div class="feat-full-item"><i class="ti ti-check"></i>Multiple payment methods</div></div></div></div>
+      <div class="feat-full-card"><div class="feat-full-icon"><i class="ti ti-chart-bar"></i></div><div><div class="feat-full-h">Analytics & Reporting</div><div class="feat-full-p">Numbers that actually matter. Prove your value to brands with shareable performance reports.</div><div class="feat-full-list"><div class="feat-full-item"><i class="ti ti-check"></i>Campaign performance metrics</div><div class="feat-full-item"><i class="ti ti-check"></i>Engagement rate tracking</div><div class="feat-full-item"><i class="ti ti-check"></i>Shareable brand reports</div><div class="feat-full-item"><i class="ti ti-check"></i>Earnings growth charts</div></div></div></div>
+      <div class="feat-full-card"><div class="feat-full-icon"><i class="ti ti-layout-grid"></i></div><div><div class="feat-full-h">Creator Feed</div><div class="feat-full-p">A professional content network. Brands discover creators, creators get found by the right partners.</div><div class="feat-full-list"><div class="feat-full-item"><i class="ti ti-check"></i>Upload portfolio videos natively</div><div class="feat-full-item"><i class="ti ti-check"></i>Brand discovery feed</div><div class="feat-full-item"><i class="ti ti-check"></i>Category & niche filtering</div><div class="feat-full-item"><i class="ti ti-check"></i>Follower count & engagement visible</div></div></div></div>
+      <div class="feat-full-card"><div class="feat-full-icon"><i class="ti ti-id-badge"></i></div><div><div class="feat-full-h">Media Kit Builder</div><div class="feat-full-p">Your professional portfolio, auto-generated from your real data. Share with brands in one tap.</div><div class="feat-full-list"><div class="feat-full-item"><i class="ti ti-check"></i>Auto-pulls your stats & past work</div><div class="feat-full-item"><i class="ti ti-check"></i>Beautiful shareable PDF</div><div class="feat-full-item"><i class="ti ti-check"></i>Rate card included</div><div class="feat-full-item"><i class="ti ti-check"></i>Always up to date automatically</div></div></div></div>
+    </div>
+  </section>
+  <div class="cta-band">
+    <h2 class="cta-band-h">Built for the way you work.</h2>
+    <p class="cta-band-sub">All the tools you need, in one place.</p>
+    <button class="btn-white" onclick="showPage('contact')">Get early access</button>
+  </div>
+</div>
+
+<!-- ══════════ PRICING ══════════ -->
+<div class="pg" id="pg-pricing">
+  <div class="pricing-hero">
+    <span class="section-tag" style="background:rgba(91,79,207,.2);color:#C5BCE8;">Pricing</span>
+    <h1 class="hero-h1" style="font-size:clamp(36px,6vw,64px);margin-top:12px;">Simple.<br><em>Transparent.</em></h1>
+    <p style="font-size:19px;color:rgba(255,255,255,.4);font-weight:300;margin-top:14px;">Simple, transparent pricing for creators and brands.</p>
+    <div class="pricing-toggle">
+      <span class="toggle-lbl">Monthly</span>
+      <div class="toggle-track" id="billing-toggle" onclick="this.classList.toggle('on')"></div>
+      <span class="toggle-lbl">Annual</span>
+      <span class="save-badge">Save 20%</span>
+    </div>
+  </div>
+  <section style="padding-top:0;margin-top:-10px;">
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-tier">Creator</div>
+        <div class="price-val">$0</div>
+        <div class="price-period">No card needed · Cancel anytime</div>
+        <div class="price-divider"></div>
+        <div class="price-list">
+          <div class="price-item"><i class="ti ti-check"></i>Full campaign hub access</div>
+          <div class="price-item"><i class="ti ti-check"></i>PR shipment tracking</div>
+          <div class="price-item"><i class="ti ti-check"></i>Payments & invoicing</div>
+          <div class="price-item"><i class="ti ti-check"></i>Basic analytics</div>
+          <div class="price-item"><i class="ti ti-check"></i>Creator profile & feed</div>
+        </div>
+        <button class="price-btn" onclick="showPage('contact')">Get started free</button>
+      </div>
+      <div class="price-card featured">
+        <div class="price-tier">Brand — Pro</div>
+        <div class="price-val">$299</div>
+        <div class="price-period">per month · billed monthly</div>
+        <div class="price-divider"></div>
+        <div class="price-list">
+          <div class="price-item"><i class="ti ti-check"></i>Unlimited campaign posting</div>
+          <div class="price-item"><i class="ti ti-check"></i>Full creator discovery</div>
+          <div class="price-item"><i class="ti ti-check"></i>PR & gifting management</div>
+          <div class="price-item"><i class="ti ti-check"></i>Campaign analytics dashboard</div>
+          <div class="price-item"><i class="ti ti-check"></i>5% transaction fee on payouts</div>
+          <div class="price-item"><i class="ti ti-check"></i>Priority support</div>
+        </div>
+        <button class="price-btn" onclick="showPage('contact')">Start free trial</button>
+      </div>
+      <div class="price-card">
+        <div class="price-tier">Creator Pro</div>
+        <div class="price-val">$19</div>
+        <div class="price-period">per month · optional upgrade</div>
+        <div class="price-divider"></div>
+        <div class="price-list">
+          <div class="price-item"><i class="ti ti-check"></i>Everything in Free</div>
+          <div class="price-item"><i class="ti ti-check"></i>Advanced analytics</div>
+          <div class="price-item"><i class="ti ti-check"></i>Auto media kit builder</div>
+          <div class="price-item"><i class="ti ti-check"></i>Priority campaign matching</div>
+          <div class="price-item"><i class="ti ti-check"></i>Verified creator badge</div>
+        </div>
+        <button class="price-btn" onclick="showPage('contact')">Upgrade to Pro</button>
+      </div>
+    </div>
+    <p style="text-align:center;font-size:24px;color:var(--sub);margin-top:28px;font-style:italic;">All prices in USD. Enterprise plans available for large brands — <span style="color:var(--purple);cursor:pointer;" onclick="showPage('contact')">contact us.</span></p>
+  </section>
+  <div class="cta-band" style="margin-top:40px;">
+    <h2 class="cta-band-h">Start free today.</h2>
+    <p class="cta-band-sub">No credit card required. Cancel anytime.</p>
+    <button class="btn-white" onclick="showPage('contact')">Get early access</button>
+  </div>
+</div>
+
+<!-- ══════════ ABOUT ══════════ -->
+<div class="pg" id="pg-about">
+  <div class="about-hero">
+    <div style="max-width:700px;">
+      <span class="section-tag" style="background:rgba(91,79,207,.2);color:#C5BCE8;">Our story</span>
+      <h1 class="hero-h1" style="font-size:clamp(36px,6vw,64px);margin-top:12px;text-align:left;">Built by a creator,<br><em>for creators.</em></h1>
+      <p style="font-size:19px;color:rgba(255,255,255,.4);font-weight:300;margin-top:14px;line-height:1.7;">We got tired of managing brand deals across five different apps. So we built the one we always wanted.</p>
+    </div>
+  </div>
+  <section>
+    <div class="about-grid">
+      <div class="about-visual" style="background:none;border-radius:20px;overflow:hidden;height:380px;position:relative;display:flex;align-items:center;justify-content:center;">
+        <!-- Layered gradient background -->
+        <div style="position:absolute;inset:0;background:linear-gradient(145deg,#0D0820 0%,#1A0F3C 50%,#2A1060 100%);"></div>
+        <!-- Animated orbs -->
+        <div style="position:absolute;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(201,116,155,.35) 0%,transparent 70%);top:-40px;right:-40px;"></div>
+        <div style="position:absolute;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(91,79,207,.4) 0%,transparent 70%);bottom:-30px;left:-30px;"></div>
+        <div style="position:absolute;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(168,152,224,.2) 0%,transparent 70%);top:40%;left:40%;"></div>
+        <!-- Grid pattern -->
+        <div style="position:absolute;inset:0;opacity:.06;background-image:linear-gradient(rgba(255,255,255,.5) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.5) 1px,transparent 1px);background-size:40px 40px;"></div>
+        <!-- Center content -->
+        <div style="position:relative;z-index:2;text-align:center;padding:32px;">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:13px;font-weight:400;color:rgba(255,255,255,.35);letter-spacing:.3em;text-transform:uppercase;margin-bottom:20px;">The creator's platform</div>
+          <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:24px;">
+            <div style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.06);border:0.5px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 16px;">
+              <div style="width:8px;height:8px;border-radius:50%;background:#C9749B;flex-shrink:0;"></div>
+              <span style="font-size:13px;color:rgba(255,255,255,.6);font-family:'Jost',sans-serif;">Campaign Hub</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.06);border:0.5px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 16px;">
+              <div style="width:8px;height:8px;border-radius:50%;background:#A898E0;flex-shrink:0;"></div>
+              <span style="font-size:13px;color:rgba(255,255,255,.6);font-family:'Jost',sans-serif;">PR Tracker</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.06);border:0.5px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 16px;">
+              <div style="width:8px;height:8px;border-radius:50%;background:#5DCAA5;flex-shrink:0;"></div>
+              <span style="font-size:13px;color:rgba(255,255,255,.6);font-family:'Jost',sans-serif;">Payments & Invoicing</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.06);border:0.5px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 16px;">
+              <div style="width:8px;height:8px;border-radius:50%;background:#EF9F27;flex-shrink:0;"></div>
+              <span style="font-size:13px;color:rgba(255,255,255,.6);font-family:'Jost',sans-serif;">Analytics & Growth</span>
+            </div>
+          </div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:500;color:rgba(255,255,255,.85);font-style:italic;">Everything. In one place.</div>
+        </div>
+      </div>
+      <div class="about-text-col">
+        <span class="section-tag">Our mission</span>
+        <div class="about-mission">"Create. Collaborate. Campaign. We Got You."</div>
+        <p class="about-p">The creator economy is one of the fastest-growing industries in the world. Rebelion.io is the operating system for the modern creator. We're building the professional infrastructure you need — starting with the people who power it: creators.</p>
+      </div>
+    </div>
+  </section>
+  <div class="team-section">
+    <div style="text-align:center;margin-bottom:8px;">
+      <span class="section-tag">The team</span>
+    </div>
+    <div class="team-grid">
+      <div class="team-card" style="flex-direction:column;gap:0;padding:0;overflow:hidden;">
+        <div style="width:100%;height:280px;background:linear-gradient(135deg,#2A1F6E 0%,#5B4FCF 55%,#C9749B 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;">
+          <div style="position:absolute;inset:0;opacity:.08;background-image:radial-gradient(circle at 25% 50%,#fff 1px,transparent 1px),radial-gradient(circle at 75% 25%,#fff 1px,transparent 1px);background-size:28px 28px;"></div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:72px;font-weight:600;color:rgba(255,255,255,.15);font-style:italic;letter-spacing:.05em;position:relative;z-index:1;">K</div>
+        </div>
+        <div style="padding:24px 28px;">
+          <div class="team-name" style="font-size:20px;margin-bottom:4px;">Keerthi</div>
+          <div class="team-role" style="margin-bottom:16px;">Founder & CEO · Full-stack engineer · Content creator</div>
+          <div class="team-bio" style="font-size:16px;line-height:1.85;color:var(--sub);font-weight:300;">"Doing what we love is the happiest feeling in existence. Situations chained me to stick to the usual, content creation gave me wings and a chance to explore and be ambitious. Rebelion.io is built for every creator who ever felt that. <em style="color:var(--purple);font-style:italic;">Just as you are, is enough.</em><br><br>You don't need to be perfect, you don't need a million followers, you don't need to prove yourself. Come as you are."</div>
+        </div>
+      </div>
+      <div class="team-card open" style="align-items:center;">
+        <div class="team-av" style="background:#EAE4FF;color:var(--purple-mid);font-size:24px;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">+</div>
+        <div>
+          <div class="team-name" style="color:var(--sub);">Co-founder / CTO</div>
+          <div class="team-role">We're hiring</div>
+          <div class="team-bio">Looking for a technical co-founder with design or growth background. Interested? Get in touch.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta-band">
+    <h2 class="cta-band-h">Join the rebellion.</h2>
+    <p class="cta-band-sub">Be part of building the future of the creator economy.</p>
+    <button class="btn-white" onclick="showPage('contact')">Get in touch</button>
+  </div>
+</div>
+
+<!-- ══════════ CONTACT ══════════ -->
+<div class="pg" id="pg-contact">
+  <div class="contact-hero">
+    <span class="section-tag" style="background:rgba(91,79,207,.2);color:#C5BCE8;">Get in touch</span>
+    <h1 class="hero-h1" style="font-size:clamp(36px,6vw,64px);margin-top:12px;">Let's talk.</h1>
+    <p style="font-size:19px;color:rgba(255,255,255,.4);font-weight:300;margin-top:14px;">Whether you're a creator, a brand, or an investor — we'd love to hear from you.</p>
+  </div>
+  <div class="contact-grid" style="padding-bottom:80px;">
+    <div class="contact-info">
+      <div class="contact-info-h">We're building something special.</div>
+      <div class="contact-info-p">Rebelion.io is in early access. Whether you want to join as a creator, onboard your brand, or explore partnership opportunities — reach out.</div>
+      <div class="contact-links">
+        <div class="contact-link-item"><div class="cli-icon"><i class="ti ti-mail"></i></div><div><div class="cli-label">Email</div><div class="cli-val">hello@rebelion.io</div></div></div>
+        <div class="contact-link-item"><div class="cli-icon"><i class="ti ti-map-pin"></i></div><div><div class="cli-label">Based in</div><div class="cli-val">San Francisco, California, USA</div></div></div>
+        <div class="contact-link-item"><div class="cli-icon"><i class="ti ti-brand-instagram"></i></div><div><div class="cli-label">Instagram</div><div class="cli-val">@rebelion.io</div></div></div>
+        <div class="contact-link-item"><div class="cli-icon"><i class="ti ti-brand-linkedin"></i></div><div><div class="cli-label">LinkedIn</div><div class="cli-val">Rebelion.io</div></div></div>
+      </div>
+    </div>
+    <div class="contact-form">
+      <div class="form-h">Get early access</div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">First name</label><input class="form-input" type="text" placeholder="Maya"/></div>
+        <div class="form-group"><label class="form-label">Last name</label><input class="form-input" type="text" placeholder="Lin"/></div>
+      </div>
+      <div class="form-group"><label class="form-label">Email</label><input class="form-input" type="email" placeholder="you@email.com"/></div>
+      <div class="form-group"><label class="form-label">I am a…</label>
+        <select class="form-select">
+          <option>Content creator</option>
+          <option>Brand / Marketing team</option>
+          <option>Investor</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group"><label class="form-label">Message (optional)</label><textarea class="form-textarea" placeholder="Tell us a bit about yourself…"></textarea></div>
+      <button class="form-submit" onclick="submitForm()">Request early access →</button>
+      <div class="form-note">We'll be in touch within 24 hours.</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand">rebelion</div>
+      <div class="footer-desc">The creator's command center. One platform for campaigns, PR, payments, and growth.</div>
+    </div>
+    <div>
+      <div class="footer-col-h">Product</div>
+      <button class="footer-link" onclick="showPage('features')">Features</button>
+      <button class="footer-link" onclick="showPage('pricing')">Pricing</button>
+      <button class="footer-link" onclick="showPage('contact')">Early access</button>
+    </div>
+    <div>
+      <div class="footer-col-h">Company</div>
+      <button class="footer-link" onclick="showPage('about')">About</button>
+      <button class="footer-link" onclick="showPage('contact')">Contact</button>
+      <button class="footer-link" onclick="showPage('about')">Careers</button>
+    </div>
+    <div>
+      <div class="footer-col-h">For</div>
+      <button class="footer-link" onclick="showPage('contact')">Creators</button>
+      <button class="footer-link" onclick="showPage('pricing')">Brands</button>
+      <button class="footer-link" onclick="showPage('contact')">Investors</button>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 Rebelion.io · All rights reserved</div>
+    <div class="footer-note-text">Brand names shown are illustrative examples only and do not represent actual partnerships.</div>
+  </div>
+</footer>
+
+<div class="toast" id="toast">🎉 You're on the list! We'll be in touch soon.</div>
+
+<script>
+const pages = ['home','features','pricing','about','contact'];
+
+function showPage(name) {
+  pages.forEach(function(p) {
+    document.getElementById('pg-' + p).classList.remove('on');
+    var nl = document.getElementById('nl-' + p);
+    if (nl) nl.classList.remove('on');
+  });
+  document.getElementById('pg-' + name).classList.add('on');
+  var nl = document.getElementById('nl-' + name);
+  if (nl) nl.classList.add('on');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+  // close mobile menu
+  document.getElementById('mobile-menu').classList.remove('open');
+}
+
+function toggleMenu() {
+  document.getElementById('mobile-menu').classList.toggle('open');
+}
+
+function submitForm() {
+  var toast = document.getElementById('toast');
+  toast.classList.add('show');
+  setTimeout(function() { toast.classList.remove('show'); }, 3500);
+}
+
+// Close mobile menu on outside click
+document.addEventListener('click', function(e) {
+  var menu = document.getElementById('mobile-menu');
+  var btn = document.querySelector('.nav-mobile-btn');
+  if (menu.classList.contains('open') && !menu.contains(e.target) && !btn.contains(e.target)) {
+    menu.classList.remove('open');
+  }
+});
+</script>
+</body>
+</html>
